@@ -1,19 +1,34 @@
 import streamlit as st
-
+from pathlib import Path
 import pandas as pd
 
 # from sklearn import datasets
 
 # from sklearn.ensemble import RandomForestClassifier
 
+from PIL import Image
+
+# --- PATH SETTINGS ---
+current_dir = Path(__file__).parent if "__file__" in locals() else Path.cwd()
+css_file = current_dir / "styles" / "main.css"
+profile_pic = current_dir / "assets" / "profile-pic.jpg"
+
+
+
+with open(css_file) as f:
+    st.markdown("<style>{}</style>".format(f.read()), unsafe_allow_html=True)
+profile_pic = Image.open(profile_pic)
+
+# --- HERO SECTION ---
+col1, col2 = st.columns(2, gap="small")
+with col1:
+    st.image(profile_pic, width=230)
+
 Year_List=[2,3,4,5,6,7,8,9,10]
 
+new_title = '<p style="font-family:sans-serif; color:#EFC050; font-size: 42px;">Compound Interest Calculator</p>'
+st.markdown(new_title, unsafe_allow_html=True)
 
-st.write("""
-
-# Compound Interest Calculator!
-
-""")
 
 
 
@@ -46,9 +61,10 @@ def user_input_features():
 
 df = user_input_features()
 
+x = '<p style="font-family:sans-serif; color:#7FCDCD; font-size: 24px;">User Entered input for Rate, Principal amount and No.of years is</p>'
+st.markdown(x,unsafe_allow_html=True)
 
 
-st.subheader('User Entered parameters for Rate, Principal amount and No of years is')
 
 st.write(df)
 
@@ -82,8 +98,5 @@ st.subheader('The Final CI is:')
 
 st.write(df_1)
 
-st.subheader("""
-
-# done by Krishna Pradeep Reddy S
-
-""")
+x = '<p style="font-family:sans-serif; color:#00CED1; font-size: 24px;">_______________________________________-deepu</p>'
+st.markdown(x,unsafe_allow_html=True)
